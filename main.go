@@ -1,16 +1,33 @@
 package main
 
 import (
+	"trilune/controllers"
 	"trilune/database"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	database.Connect()
+	r := gin.Default()
+	r.GET("/expenses", controllers.GetAllExpenses)
+	r.GET("/expenses/:id", controllers.GetExpensesByID)
+	r.PUT("/expenses/:id", controllers.UpdateExpenses)
+	r.POST("/expenses", controllers.CreateExpenses)
+	r.DELETE("/expenses/:id", controllers.DeleteExpenses)
 
-	// Example insert values
-	// var Category = []models.Category{{Name: "Первая категория"}, {Name: "Вторая категория"}}
+	r.GET("/incomes", controllers.GetAllIncomes)
+	r.GET("/incomes/:id", controllers.GetIncomesByID)
+	r.PUT("/incomes/:id", controllers.UpdateIncomes)
+	r.POST("/incomes", controllers.CreateIncomes)
+	r.DELETE("/incomes/:id", controllers.DeleteIncomes)
 
-	// expenses := models.Expenses{Name: "Вторая трата", Money: 100, Categorys: Category}
+	r.GET("/category", controllers.GetAllCategories)
+	r.GET("/category/:id", controllers.GetCategoriesByID)
+	r.PUT("/category/:id", controllers.UpdateCategories)
+	r.POST("/category", controllers.CreateCategory)
+	r.DELETE("/category/:id", controllers.DeleteCategory)
 
-	// database.DB.Create(&expenses)
+	r.Run()
+
 }

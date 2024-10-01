@@ -4,19 +4,22 @@ import "gorm.io/gorm"
 
 type Expenses struct {
 	gorm.Model
-	Name       string     `json:"name"`
-	Money      int        `json:"money"`
-	Categories []Category `gorm:"foreignKey:CategoryID" json:"Categories"`
+	Name       string   `json:"name"`
+	Money      int      `json:"money"`
+	CategoryID uint     `gorm:"not null" json:"category_id"`
+	Categories Category `gorm:"foreignKey:CategoryID" json:"category"`
+	// Categories []Category `gorm:"foreignKey:CategoryID" json:"Categories"`
 }
 
 type Incomes struct {
 	gorm.Model
-	Money      int        `json:"money"`
-	Name       string     `json:"name"`
-	Categories []Category `gorm:"foreignKey: CategoryID" json:"Categories"`
+	Money      int      `json:"money"`
+	Name       string   `json:"name"`
+	CategoryID uint     `json:"category_id"`                           // Поле для ID категории
+	Categories Category `gorm:"foreignKey:CategoryID" json:"category"` // Связь с категорией
+	// Categories []Category `gorm:"foreignKey: CategoryID" json:"category"`
 }
 type Category struct {
 	gorm.Model
-	Name       string `json:"name"`
-	CategoryID int    `json:"CategoryID"`
+	Name string `json:"name"`
 }

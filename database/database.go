@@ -21,6 +21,6 @@ func Connect() {
 	}
 
 	// Автоматическая миграция модели Cocktail
-	DB.AutoMigrate(&models.Expenses{}, &models.Category{})
+	DB.AutoMigrate(&models.Expenses{}, &models.Category{}, &models.Incomes{})
 
 }
